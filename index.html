@@ -299,6 +299,20 @@
                 </div>
             </div>
         </div>
+        <script>
+        // Function to open the pop-up
+        function openPopup() {
+            document.getElementById("popup").style.display = "flex";
+        }
+    
+        // Function to close the pop-up
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    
+        // Automatically open the pop-up after the color transition (12 seconds)
+        setTimeout(openPopup, 12000);
+    </script>
     </main>
 
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
