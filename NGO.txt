@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>NGO Climate Action and Gender Equality</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        section {
+            padding: 40px;
+            text-align: center;
+            background-color: white;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        section h2 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        section p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .donation-buttons button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .donation-buttons button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        /* Add media queries for responsiveness */
+        @media screen and (max-width: 768px) {
+            section {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>NGOs for Climate Action & Gender Equality</h1>
+        <p>Empowering communities through action and awareness</p>
+    </header>
+
+    <!-- Section 1: Already Working NGOs -->
+    <section id="ngos">
+        <h2>Already Working NGOs</h2>
+        <p>Discover NGOs actively addressing climate change and gender inequality.</p>
+        <ul>
+            <li>NGO 1 - <a href="#">Visit Website</a></li>
+            <li>NGO 2 - <a href="#">Visit Website</a></li>
+            <li>NGO 3 - <a href="#">Visit Website</a></li>
+        </ul>
+    </section>
+
+    <!-- Section 2: Possible Donations -->
+    <section id="donations">
+        <h2>Possible Donations</h2>
+        <p>Your contributions make a difference. Donate now to support these NGOs.</p>
+        <div class="donation-buttons">
+            <button>$10</button>
+            <button>$50</button>
+            <button>$100</button>
+            <button>Custom Amount</button>
+        </div>
+    </section>
+
+    <!-- Section 3: Suggestions -->
+    <section id="suggestions">
+        <h2>Suggestions</h2>
+        <p>There are many ways to contribute to the cause. Get involved beyond donations.</p>
+        <ul>
+            <li>Volunteer with an NGO</li>
+            <li>Start an awareness campaign in your community</li>
+            <li>Share information on social media</li>
+        </ul>
+    </section>
+
+    <!-- Section 4: Alerting System for NGOs -->
+    <section id="alerts">
+        <h2>NGO Alerting System</h2>
+        <p>Report incidents and we'll notify the relevant NGOs in real-time.</p>
+        <form>
+            <label for="incident">Report an Incident:</label><br>
+            <textarea id="incident" name="incident" rows="4" cols="50" placeholder="Describe the issue..."></textarea><br>
+            <button type="submit">Submit Report</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 NGO Climate Action & Gender Equality</p>
+    </footer>
+
+</body>
+
+</html>

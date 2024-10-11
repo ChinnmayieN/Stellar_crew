@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLOGS</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://media.istockphoto.com/id/1262289834/photo/hands-hugging-a-trunk-of-a-tree-in-summer-park-or-forest-with-sunlight-ecology-loving-nature.jpg?s=612x612&w=0&k=20&c=Tn4bR2EyFnhHlqRfYUrF_93vYgbY_dy3IQZ4wEyViNo='); /* Replace with a valid URL */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background */
+    margin: 0;
+    padding: 20px;
+}
+        .container {
+            max-width: 1500px; /* Adjusted for a narrower layout */
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        h2 {
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .example-stories {
+            display: flex; /* Use flexbox for alignment */
+            flex-direction: column; /* Stack items vertically */
+            gap: 40px; /* Space between boxes */
+            margin-bottom: 20px;
+        }
+
+        .story-box {
+            display: flex; /* Flexbox for side-by-side layout */
+            align-items: center; /* Center vertically */
+            background: #fff; /* White background */
+            border-radius: 4px;
+            padding: 15px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative; /* For button positioning */
+        }
+
+        .story-image {
+            width: 50%; /* Set width to 50% for the image */
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 4px; /* Round image corners */
+            margin-right: 15px; /* Space between image and text */
+        }
+
+        .story-content {
+            flex-grow: 1; /* Allow text to fill available space */
+            width: 50%; /* Set width to 50% for the content */
+            text-align: left; /* Align text to the left */
+        }
+
+        .hero__heading {
+            margin-top: var(--type--heading--margin-top);
+            margin-bottom: 0;
+            font-weight: 900;
+            line-height: var(--type--heading--line-height);
+            font-size: calc(1.375rem + 1.5vw);
+        }
+
+        .read-more {
+            display: inline-block; /* Ensure it behaves like a block element */
+            background-color: #5cb85c;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            position: absolute;
+            text-decoration: none; /* Remove underline */
+            text-align: center; /* Center text */
+            bottom: 15px; /* Space from bottom */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Adjust for centering */
+        }
+
+        .read-more:hover {
+            background-color: #4cae4c; /* Hover effect */
+        }
+
+        .blog-list {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #5cb85c;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>BLOGS</h1>
+        
+        <h2>Some Brave Blogs</h2>
+        <div id="example-stories" class="example-stories">
+            <div class="story-box">
+                <img src="https://media.istockphoto.com/id/1262289834/photo/hands-hugging-a-trunk-of-a-tree-in-summer-park-or-forest-with-sunlight-ecology-loving-nature.jpg?s=612x612&w=0&k=20&c=Tn4bR2EyFnhHlqRfYUrF_93vYgbY_dy3IQZ4wEyViNo=" alt="Example Image 1" class="story-image">
+                <div class="story-content">
+                    <h3 class="hero_heading">Voices for Change: Our Fight for Climate Justice</h3>
+                    <p>As young women living in a world increasingly affected by climate change, we recognize the unique challenges our generation faces. Each day, we witness the devastating impacts of environmental degradation—effects that disproportionately affect marginalized communities, especially women and girls.
+
+                        Carmela Ellaga, a 21-year-old from the Philippines, shares, “Growing up near the ocean, I saw how rising tides and storms disrupted my education and threatened my family’s way of life. My journey into environmental advocacy began when I learned about sustainable fishing practices. Today, I work to protect our marine resources and educate others in my community about conservation.”
+                        
+                        In Kenya, Ellyanne Wanjiku, just 10 years old, has already made significant strides. “After learning about the work of Wangari Maathai, I convinced my mother to help me plant a tree. Now, through my nonprofit, Children With Nature, we've planted over 250,000 trees! I believe that tree planting is essential for both our community and the planet.”
+                        
+                        Similarly, Xiye Bastida from the U.S. has turned her personal experiences into activism. “My hometown was devastated by flooding, forcing my family to flee. I want to ensure that future generations have the education and resources to combat climate change. We need climate education to be a fundamental right in schools!”
+                        
+                        Through our collective voices, we are determined to fight for climate justice. We advocate for policies that promote sustainability and equity, and we strive to inspire our peers to take action. Together, we can create a world where everyone, regardless of gender, can thrive amidst the challenges posed by climate change.
+                    </p>
+                </div>
+                <a href="https://www.globalcitizen.org/en/content/young-women-fighting-for-climate-justice/" class="read-more" target="_blank">Read More</a>
+            </div>
+        </div>
+
+        <h2>Share Your Story</h2>
+        <div id="blog-list" class="blog-list"></div>
+
+        <form id="story-form">
+            <label for="story-title">Title:</label>
+            <input type="text" id="story-title" required>
+
+            <label for="story-content">Story:</label>
+            <textarea id="story-content" rows="4" required></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        // Function to auto-resize the textarea
+        const autoResizeTextarea = (textarea) => {
+            textarea.style.height = 'auto'; // Reset the height
+            textarea.style.height = textarea.scrollHeight + 'px'; // Set it to the scroll height
+        };
+
+        // Add an event listener to resize the textarea on input
+        document.getElementById('story-content').addEventListener('input', function () {
+            autoResizeTextarea(this);
+        });
+
+        // Initial call to set the height if there's any default text
+        autoResizeTextarea(document.getElementById('story-content'));
+
+        document.getElementById('story-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get user inputs
+            const title = document.getElementById('story-title').value;
+            const content = document.getElementById('story-content').value;
+
+            // Create a new blog post element
+            const blogPost = document.createElement('div');
+            blogPost.classList.add('story-box'); // Use the same class as example stories
+            blogPost.innerHTML = `
+                <img src="https://via.placeholder.com/150" alt="User Story Image" class="story-image">
+                <h3>${title}</h3>
+                <p>${content}</p>
+                <button class="read-more">Read More</button>
+            `;
+
+            // Append the new blog post to the blog list
+            document.getElementById('blog-list').appendChild(blogPost);
+
+            // Clear the form
+            document.getElementById('story-title').value = '';
+            document.getElementById('story-content').value = '';
+            autoResizeTextarea(document.getElementById('story-content')); // Reset the height after clearing
+        });
+    </script>
+</body>
+</html>

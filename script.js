@@ -29,6 +29,118 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
+
+// Load GeoJSON data via fetch (assuming the file is stored locally or hosted)
+fetch('countries.geojson.json') // Change this path to the correct location
+    .then(response => response.json())
+    .then(geojsonData => {
+        console.log(geojsonData);
+        // Add the GeoJSON data to your map with styling
+        L.geoJson(geojsonData, { style: style }).addTo(map);
+    })
+    .catch(error => console.error('Error loading GeoJSON data:', error));
+
+// Your country data with values
+var countryData = {
+    "India": 21.42,
+    "Bangladesh": 41.52,
+    "Pakistan": 42.34,
+    "Philippines": 21.99,
+    "Vietnam": 35.71,
+    "Nepal": 61.22,
+    "Indonesia": 23.94,
+    "Sri Lanka": 53.44,
+    "Myanmar": 37.10,
+    "Thailand": 15.80,
+    "Germany": 4.067,
+    "France":3.99,
+    "United Kingdom":3.283,
+    "Italy":4.41,
+    "Spain":3.45,
+    "Poland":1.4896,
+    "Romania":0.931,
+    "Netherlands":0.88,
+    "Belgium":0.45,
+    "Czech Republic":0.360,
+    "Greece":0.757,
+    "Portugal":0.598,
+    "Sweden":0.411,
+    "Hungary":0.47,
+    "Austria":0.35,
+    "Switzerland":0.29,
+    "Bulgaria":0.33,
+    "Denmark":0.22,
+    "Finland":0.18,
+    "Slovakia":0.21,
+    "Norway":0.18,
+    "Ireland":0.24,
+    "Croatia":0.23,
+    "Lithuania":0.101,
+    "Slovenia":0.072,
+    "Latvia":0.061,
+    "Estonia":0.04,
+    "Cyprus":0.05,
+    "Luxembourg":0.02,
+    "Malta":0.02,
+    "United States of America" : "0.1250",
+    "Canada" : "0.1250",
+    "Mexico" : "0.1250",
+    "Brazil" : "0.1250",
+    "Argentina" : "0.1250",
+    "Colombia" : "0.1250",
+    "Peru" : "0.1252",
+    "Venezuela" : "0.1250",
+    "Chile" : "0.1253",
+    "Ecuador" : "0.1250",
+    "Bolivia" : "0.1250"
+
+
+};
+
+// Define the getColor function based on your value ranges
+function getColor(value) {
+    return value > 50 ? '#8B0000' :   // Dark Red for values above 50
+           value > 10 ? '#FF4500' :   // Light Red for values above 30
+           value > 0.5 ? '#FFB6C1' :   // Pink for values above 20
+           value > 0.3 ? '#673AB7' : // light blue
+           value > 0.1250 ? '#FFA500' :   // Orange for values above 10
+           value > 0  ? '#FFFF00' :   // Yellow for values above 0
+                        '#F0E68C';     // Light Yellow for 0 or less
+}
+
+
+function style(feature) {
+        const countryName = feature.properties.name;  // Use country name
+        const countryValue = countryData[countryName];
+    return {
+        fillColor: getColor(countryValue), // Use your data field here
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
+// Optional: Add a legend to explain the color gradient
+var legend = L.control({ position: 'bottomright' });
+
+legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+        labels = [];
+
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+legend.addTo(map);
+
 // Define locations with their coordinates and pop-up messages
 const locations = [
     { coords: [37.7749, -122.4194], message: 'I am in San Francisco, USA' },
@@ -50,3 +162,5 @@ locations.forEach(location => {
     const marker = L.marker(location.coords , { icon: emojiIcon }).addTo(map);
     marker.bindPopup(location.message); // Bind the pop-up message to the marker
 });
+
+

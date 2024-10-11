@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Time</title>
+    <link rel="stylesheet" href="story.css"> <!-- Link to the external CSS file -->
+</head>
+<body>
+
+    <h1>Story Time!</h1>
+
+    <div class="hex-container">
+        <div class="hex" onclick="showModal(1)">Pakistan</div>
+        <div class="hex" onclick="showModal(2)">India</div>
+        <div class="hex" onclick="showModal(3)">Bangladesh</div>
+        <div class="hex" onclick="showModal(4)">Kenyan</div>
+        <div class="hex" onclick="showModal(5)">Fijian</div>
+        <div class="hex" onclick="showModal(6)">Nepal</div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <img id="modal-image" src="">
+            <p id="modal-text">Modal Content</p>
+        </div>
+    </div>
+
+    <script src="story.js"></script> <!-- Link to the external JavaScript file -->
+</body>
+</html>

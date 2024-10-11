@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        #map {
+            height: 600px;
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .leaflet-popup-content {
+            font-size: 14px;
+            color: #000000;
+            background-color: #fbd3d3;
+            border-radius: 4px;
+            padding: 10px;
+        }
+
+        .leaflet-popup-content a {
+            color: blue;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Global Map</h1>
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        // Define a custom emoji icon
+        const emojiIcon = L.divIcon({
+            className: 'emoji-icon', // Custom class for styling
+            html: '<span style="font-size: 24px;">📍</span>', // Use the desired emoji here
+            iconSize: [30, 30], // Size of the icon (width, height)
+        });
+
+        // Initialize the map
+        var map = L.map('map', {
+            zoomControl: true,         // Enables zoom controls
+            scrollWheelZoom: true,     // Allows zooming with the mouse wheel
+            doubleClickZoom: false,    // Disables zooming on double-click
+            dragging: true,            // Enables dragging
+            minZoom: 2,                // Prevents zooming out below level 2
+            maxZoom: 18                // Sets the maximum zoom-in level (default is 18)
+        }).setView([0, 0], 2); // Centered on the whole world with an initial zoom level of 2
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Define locations with their coordinates, pop-up messages, and read-more links
+        const locations = [
+            { coords: [37.7749, -122.4194], message: 'I am in San Francisco, USA. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/San_Francisco" target="_blank">Read more</a>' },
+            { coords: [51.5074, -0.1278], message: 'I am in London, UK. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/London" target="_blank">Read more</a>' },
+            { coords: [35.6895, 139.6917], message: 'I am in Tokyo, Japan. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Tokyo" target="_blank">Read more</a>' },
+            { coords: [-33.4489, -70.6693], message: 'I am in Santiago, Chile. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Santiago" target="_blank">Read more</a>' },
+            { coords: [20.5937, 78.9629], message: 'I am in India. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/India" target="_blank">Read more</a>' },
+            { coords: [40.7128, -74.0060], message: 'I am in New York City, USA. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/New_York_City" target="_blank">Read more</a>' },
+            { coords: [-33.8688, 151.2093], message: 'I am in Sydney, Australia. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Sydney" target="_blank">Read more</a>' },
+            { coords: [30.0444, 31.2357], message: 'I am in Cairo, Egypt. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Cairo" target="_blank">Read more</a>' },
+            { coords: [23.6850, 90.3563], message: 'I am in Bangladesh. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Bangladesh" target="_blank">Read more</a>' },
+            { coords: [15.8700, 100.9925], message: 'I am in Thailand. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Thailand" target="_blank">Read more</a>' },
+            { coords: [21.473534, 55.975414], message: 'I am in Oman. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Oman" target="_blank">Read more</a>' },
+        ];
+
+        // Loop through the locations and add markers
+        locations.forEach(location => {
+            const marker = L.marker(location.coords, { icon: emojiIcon }).addTo(map);
+            marker.bindPopup(location.message); // Bind the pop-up message with the href link to the marker
+        });
+    </script>
+</body>
+
+</html>

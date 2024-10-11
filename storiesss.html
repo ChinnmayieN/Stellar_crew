@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Time</title>
+    <style>
+        /* Basic layout styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://foreignpolicy.com/wp-content/uploads/2021/11/climate-change-storytelling-foreign-policy-illustration.jpg?quality=90'); /* Replace with a valid URL */
+            background-size: cover; /* Cover the entire background */
+            background-position: center; /* Center the background */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+
+        /* Center the title at the top */
+        h1 {
+            position: absolute;
+            top: 20px;
+            font-size: 36px;
+            background-color: #cfe0ff;
+            padding: 10px;
+            border-radius: 10px;
+            text-align: center;
+            width: 50%;
+            margin: 0;
+        }
+
+        /* Hexagon Container */
+        .hex-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin-top: 100px;
+            /* Move below the title */
+        }
+
+        /* Hexagon Styles */
+        .hex {
+            width: 100px;
+            height: 57.74px;
+            background-color: #7da3cd;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            text-align: center;
+            font-weight: bold;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .hex:hover {
+            background-color: #0056b3;
+        }
+
+        /* Circular Layout of Hexagons */
+        .hex:nth-child(1) {
+            top: 10%;
+            /* Top hexagon */
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hex:nth-child(2) {
+            top: 30%;
+            left: 15%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hex:nth-child(3) {
+            top: 70%;
+            left: 15%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hex:nth-child(4) {
+            top: 90%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hex:nth-child(5) {
+            top: 70%;
+            left: 85%;
+            transform: translate(-50%, -50%);
+        }
+
+        .hex:nth-child(6) {
+            top: 30%;
+            left: 85%;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Modal (Popup) Styles */
+        .modal {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            text-align: center;
+            position: relative;
+            overflow-y: auto;
+            /* Enables vertical scrolling */
+            overflow-x: hidden;
+            /* Prevents horizontal scrolling */
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .modal img {
+            width: 50%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Story Time!</h1>
+
+    <div class="hex-container">
+        <div class="hex" onclick="showModal(1)">Pakistan</div>
+        <div class="hex" onclick="showModal(2)">India</div>
+        <div class="hex" onclick="showModal(3)">Bangladesh</div>
+        <div class="hex" onclick="showModal(4)">Kenya</div>
+        <div class="hex" onclick="showModal(5)">Fiji</div>
+        <div class="hex" onclick="showModal(6)">Nepal</div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <img id="modal-image" src="" alt="Story Image">
+            <p id="modal-text">Modal Content</p>
+        </div>
+    </div>
+
+    <script>
+        function showModal(index) {
+            // Show the modal
+            const modal = document.getElementById('modal');
+            const modalText = document.getElementById('modal-text');
+            const modalImage = document.getElementById('modal-image');
+
+            // Set the content and image based on which hexagon was clicked
+            switch (index) {
+                case 1:
+                    modalText.innerText = "Story from Pakistan:\n\nSajida Batool from Sindh, Pakistan, lost her home and disrupted her education in last year’s devastating floods, illustrating how climate change disproportionately affects women.";
+                    modalImage.src = "https://www.unicef.org/rosa/sites/unicef.org.rosa/files/styles/press_release_feature/public/AZ_PAK_UNICEF_2022Floods_146.jpg.webp?itok=fYlzUC0M";
+                    break;
+                case 2:
+                    modalText.innerText = "Story from India:\n\nIn August 2017, severe floods in Bihar, India, displaced nearly 900,000 people and killed 815. Women like Hema Devi were forced into vulnerable situations.";
+                    modalImage.src = "https://dialogue.earth/content/uploads/2022/01/20220106_Woman-wades-through-floodwater-Bihar_McNaughton_Alamy_2CJDFD8-1400x885.jpg";
+                    break;
+                case 3:
+                    modalText.innerText = "Story from Bangladesh:\n\nRajena Boiragi, a 55-year-old woman from Holdibunia, Bangladesh, endured severe hardship when Cyclone Aila struck in May 2009, destroying her home and fish pond.";
+                    modalImage.src = "https://www.unwomen.org/sites/default/files/Headquarters/Images/Sections/News/Stories/2015/Bangladesh_PC_BRAC_FeedingDucks_1_400x267.jpg?la=en";
+                    break;
+                case 4:
+                    modalText.innerText = "Story from Kenya:\n\nClimate change in Kenya is intensifying severe weather events like floods and droughts, significantly impacting the agricultural sector and increasing intimate partner violence.";
+                    modalImage.src = "https://fullerproject.org/wp-content/uploads/2022/11/Kenya_2-2048x1365.jpg";
+                    break;
+                case 5:
+                    modalText.innerText = "Story from Fiji:\n\nIn the Pacific, women face some of the highest rates of gender-based violence worldwide, with 72% of Fijian women affected. Climate change further exacerbates these challenges.";
+                    modalImage.src = "https://www.unaids.org/sites/default/files/fijiPicture3_960-2.png";
+                    break;
+                case 6:
+                    modalText.innerText = "Story from Nepal:\n\nNepal is highly vulnerable to climate change, with frequent floods and droughts affecting livelihoods, especially in Madhesh province.";
+                    modalImage.src = "https://reliefweb.int/sites/default/files/styles/small/public/previews/e0/6d/e06de018-e1b2-4fc4-9088-05ed361b6ec0.png.webp?2558099-1-0";
+                    break;
+                default:
+                    modalText.innerText = "No details available.";
+                    modalImage.src = ""; // Default or empty image
+            }
+
+            // Display the modal
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            // Hide the modal
+            const modal = document.getElementById('modal');
+            modal.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html>

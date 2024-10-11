@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disaster Focus</title>
+    <style>
+        /* General styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-position: center;
+            transition: background 0.5s ease-in-out;
+            color: white;
+            background-color: #1c1c1c;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #f0f0f0;
+        }
+
+        .modal {
+            display: block;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background-color: #2c2c2c;
+            margin: 15% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        select, button {
+            margin: 10px 0;
+            padding: 10px;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #e63946;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #d62828;
+        }
+
+        #disasterInfo {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        .chart-container {
+            width: 21%; /* Further reduced by 40% */
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .examples {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .examples ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .examples ul li {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #f0f0f0;
+        }
+
+        .example-header {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #e3e3e3;
+            text-align: center;
+        }
+
+        .left-column {
+            width: 45%;
+            text-align: left;
+        }
+
+        .right-column {
+            width: 45%;
+            text-align: right;
+        }
+    </style>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Modal to Select Disaster -->
+    <div id="disasterModal" class="modal">
+        <div class="modal-content">
+            <h2>Select a Disaster Type</h2>
+            <select id="disasterSelect">
+                <option value="">-- Select Disaster --</option>
+                <option value="wildfire">Wildfires</option>
+                <option value="earthquake">Earthquakes</option>
+                <option value="hurricane">Hurricanes</option>
+                <option value="cyclones">Cyclones</option> <!-- Added Cyclones -->
+                <option value="tsunami">Tsunamis</option>
+                <option value="flood">Floods</option>
+            </select>
+            <button id="submitDisaster">Submit</button>
+        </div>
+    </div>
+
+    <!-- Section for Showing Disaster Data -->
+    <section id="disasterInfo" style="display:none;">
+        <h1 id="disasterHeading"></h1>
+        <div class="chart-container">
+            <canvas id="disasterChart"></canvas>
+        </div>
+        <div class="examples">
+            <div class="left-column">
+                <h2 class="example-header">Natural Impact</h2>
+                <ul id="naturalExamples"></ul>
+            </div>
+            <div class="right-column">
+                <h2 class="example-header">Human Impact</h2>
+                <ul id="manmadeExamples"></ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        window.onload = function() {
+            const modal = document.getElementById('disasterModal');
+            const submitButton = document.getElementById('submitDisaster');
+            const disasterSelect = document.getElementById('disasterSelect');
+            const disasterInfo = document.getElementById('disasterInfo');
+            const disasterHeading = document.getElementById('disasterHeading');
+            const naturalExamples = document.getElementById('naturalExamples');
+            const manmadeExamples = document.getElementById('manmadeExamples');
+            const disasterChartCtx = document.getElementById('disasterChart').getContext('2d');
+            
+            let disasterChart;
+
+            // Data for different disasters
+            const disasterData = {
+
+                wildfire: {
+                    title: "Wildfires",
+                    background: "url('https://images.theconversation.com/files/603133/original/file-20240626-19-edcvz.jpg?ixlib=rb-4.1.0&rect=49%2C581%2C5547%2C2773&q=45&auto=format&w=1356&h=668&fit=crop')",
+                    chartData: [60, 40],
+                    naturalExamples: ["Greek Wildfires (2007)"],
+                    manmadeExamples: ["California Wildfires (2020)", "Australian Bushfires (2019)", "Deforestation-fueled fires in the Amazon"]
+                },
+                earthquake: {
+                    title: "Earthquakes",
+                    background: "url('https://media-cldnry.s-nbcnews.com/image/upload/t_fit-860w,f_avif,q_auto:eco,dpr_2/rockcms/2024-01/240117-japan-earthquake-05-aa-1b5d87.jpg')",
+                    chartData: [100, 0],
+                    naturalExamples: ["Great Chilean Earthquake (1960)", "Tohoku Earthquake (2011)"],
+                    manmadeExamples: ["Human-triggered earthquakes from fracking", "Earthquakes caused by reservoir-induced seismicity"]
+                },
+                hurricane: {
+                    title: "Hurricanes",
+                    background: "url('https://www.puroclean.com/wp-content/uploads/2016/07/hurricane_facts-860x493.jpeg')",
+                    chartData: [100, 0],
+                    naturalExamples: ["Hurricane Katrina (2005)", "Cyclone Amphan (2020)"],
+                    manmadeExamples: ["Worsened by climate change due to rising sea levels and warmer ocean temperatures"]
+                },
+                cyclones: {  // Added Cyclones
+                    title: "Cyclones",
+                    background: "url('https://wmo.int/sites/default/files/styles/hero_image_desktop_1x/public/2023-03/AdobeStock_249818596_g.jpeg?h=ddfd17fe&itok=9HdgXoY7')", // Replace with actual URL
+                    chartData: [70, 30],
+                    naturalExamples: ["Cyclone Idai (2019)", "Cyclone Yasi (2011)"],
+                    manmadeExamples: ["Climate change-induced stronger cyclones", "Urban development increasing cyclone damage"]
+                },
+                tsunami: {
+                    title: "Tsunamis",
+                    background: "url('https://www.preventionweb.net/sites/default/files/styles/landscape_16_9/public/2022-11/Shutterstock_2209605359-min.jpg?h=2cf907fb&itok=hoeRIohp')",
+                    chartData: [90, 10],
+                    naturalExamples: ["Indian Ocean Tsunami (2004)", "Japan Tsunami (2011)"],
+                    manmadeExamples: ["Underwater mining and oil drilling increasing vulnerability to tsunamis"]
+                },
+                flood: {
+                    title: "Floods",
+                    background: "url('https://images.theconversation.com/files/595361/original/file-20240521-17-eercl8.jpg')",
+                    chartData: [90, 10],
+                    naturalExamples: ["Kerala Floods (2018)", "Mississippi River Flood (1993)"],
+                    manmadeExamples: ["Flooding worsened by urban sprawl, deforestation, and climate change"]
+                }
+            };
+
+            // Handle the Submit Button
+            submitButton.addEventListener('click', function() {
+                const selectedDisaster = disasterSelect.value;
+
+                if (selectedDisaster && disasterData[selectedDisaster]) {
+                    // Hide the modal
+                    modal.style.display = "none";
+
+                    // Show the disaster info section
+                    disasterInfo.style.display = "block";
+
+                    // Set the background image
+                    document.body.style.backgroundImage = disasterData[selectedDisaster].background;
+
+                    // Set the disaster title
+                    disasterHeading.textContent = disasterData[selectedDisaster].title;
+
+                    // Clear previous examples and add new ones
+                    naturalExamples.innerHTML = "";
+                    disasterData[selectedDisaster].naturalExamples.forEach(function(example) {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = example;
+                        naturalExamples.appendChild(listItem);
+                    });
+
+                    manmadeExamples.innerHTML = "";
+                    disasterData[selectedDisaster].manmadeExamples.forEach(function(example) {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = example;
+                        manmadeExamples.appendChild(listItem);
+                    });
+
+                    // Update the pie chart
+                    if (disasterChart) {
+                        disasterChart.destroy(); // Destroy the previous chart instance
+                    }
+                    disasterChart = new Chart(disasterChartCtx, {
+                        type: 'pie',
+                        data: {
+                            labels: ['Natural', 'Man-made'],
+                            datasets: [{
+                                data: disasterData[selectedDisaster].chartData,
+                                backgroundColor: ['#4CAF50', '#F44336']
+                            }]
+                        }
+                    });
+                } else {
+                    alert("Please select a disaster type.");
+                }
+            });
+        };
+    </script>
+</body>
+</html>
