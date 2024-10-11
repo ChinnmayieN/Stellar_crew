@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Calculator</title>
+    <link rel="stylesheet" href="bon.css">
+</head>
+<body>
+    <div class="head">
+    <h1>Carbon Foot Print</h1>
+    </div>
+    <div class="info-text">
+        <p>Picture walking through a vibrant forest, where every breath fills you with fresh air. Now imagine that same forest, silent and bare, a reality shaped by our carbon footprint—the invisible mark we leave with every choice we make.</p>
+
+        <p>A carbon footprint reflects the total greenhouse gases emitted through our actions, from driving to energy use and food choices. As we embrace modern lifestyles, our footprints grow larger, contributing to alarming changes in our world. The World Wildlife Fund reports a staggering 68% decline in wildlife populations since 1970, driven by habitat loss and climate change.</p>
+            
+        <p>Our daily choices hold the power to impact the planet positively. By understanding our carbon footprints, we can start making informed decisions that restore the balance of nature.</p>
+    </div>
+    <div class="container">
+        <h2>Carbon Footprint Calculator</h2>
+        <form id="calculator-form">
+            <label for="miles-driven">Miles Driven per Week:</label>
+            <input type="number" id="miles-driven" required>
+
+            <label for="fuel-efficiency">Fuel Efficiency (mpg):</label>
+            <input type="number" id="fuel-efficiency" required>
+
+            <label for="kwh-used">Monthly Electricity Usage (kWh):</label>
+            <input type="number" id="kwh-used" required>
+
+            <label for="meat-servings">Meat Servings per Week:</label>
+            <input type="number" id="meat-servings" required>
+
+            <button type="submit">Calculate Carbon Footprint</button>
+        </form>
+
+        <div id="result" class="result"></div>
+    </div>
+
+    <script src="foot.js"></script>
+</body>
+</html>
