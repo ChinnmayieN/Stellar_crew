@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLIMATE WITH FEM</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            animation: colorTransition 12s forwards, flicker 1.5s 9.6s;
+            background-image: url('https://www.shutterstock.com/image-photo/offroad-trail-through-dense-forest-600nw-2473439087.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Smooth Color Transition */
+        @keyframes colorTransition {
+            0% {
+                background: #040444;
+            }
+
+            20% {
+                background: #1a1a80;
+            }
+
+            40% {
+                background: #5a2d86;
+            }
+
+            60% {
+                background: #b6648d;
+            }
+
+            80% {
+                background: #971c3b;
+            }
+
+            100% {
+                background: #2d0202;
+            }
+        }
+
+        /* Header styling */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #5c5c95;
+            position: relative;
+            z-index: 1;
+        }
+        h1 {
+            color: #ffffff;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .navbar input {
+            padding: 5px;
+            margin-left: 20px;
+        }
+
+        /* Main content styling */
+        .main-content {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .icon-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0;
+            padding: 0 10%;
+            background-color: #333333;
+            padding: 30px 0;
+        }
+
+        /* Icons and text */
+        .icon-item {
+            text-align: center;
+            color: white;
+        }
+
+        .icon-item a {
+            text-decoration: none;
+            font-size: 18px;
+            color: #fff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .icon-item a:hover {
+            color: #87CEEB;
+        }
+
+        .icon-item img {
+            display: block;
+            margin: 0 auto 10px;
+            width: 50px;
+            height: 50px;
+        }
+
+        /* Map Section */
+        #map {
+            height: 600px;
+            width: 100%;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        /* Pop-up styling */
+        .popup {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: black;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 90%;
+            width: 900px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .video-container video {
+            width: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background"></div>
+
+    <header class="header">
+        <div class="logo">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPCSwgF4h6LdfVc9XLzxP4yqEwLCIuYWl2Jw&s" alt="LOGO">
+            <h1>CLIMATE WITH FEM</h1>
+        </div>
+        <nav class="navbar">
+            <a href="#">Home</a>
+            <a href="#">Data</a>
+            <a href="#">Topics</a>
+            <a href="#">Learn</a>
+            <a href="#">Engage</a>
+            <a href="#">About</a>
+            <input type="text" placeholder="Search...">
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2>Empower Women, Heal the Earth: Together, We Build a Resilient Future</h2>
+        <h3>Welcome to our interactive platform that explores the powerful connection between gender inequality and
+            climate
+            change.</h3>
+
+        <p>Around the world, women face the brunt of climate impacts, from devastating natural disasters to resource
+            scarcity.
+            This
+            website takes you on a journey to uncover these realities, hear personal stories from affected communities,
+            and
+            explore
+            the role women play in driving solutions.</p>
+
+        <p>Together, we can address climate change while promoting gender equality. Join us to learn, share, and take
+            action!
+        </p>
+
+        <!-- Icon Container -->
+        <div class="icon-container">
+            <div class="icon-item">
+                <a href="file:///C:/Users/tsrsr/Desktop/NASA/carbon/car.html">Carbon Footprints</a>
+            </div>
+            <div class="icon-item">
+                <a href="file:///C:/Users/tsrsr/Desktop/NASA/webbie/storiesss.html">Stories to be Heard</a>
+            </div>
+            <div class="icon-item">
+                <a href="file:///C:/Users/tsrsr/Desktop/NASA/webbie/finalblog.html">Stories to Share</a>
+            </div>
+            <div class="icon-item">
+                <a href="file:///C:/Users/tsrsr/Desktop/NASA/webbie/course%20and%20school.html">Courses</a>
+            </div>
+            <div class="icon-item">
+                <a href="file:///C:/Users/tsrsr/Desktop/NASA/webbie/workshops.html">Workshops</a>
+            </div>
+            <div class="icon-item">
+                <a href="file:///C:/Users/tsrsr/Desktop/NASA/webbie/bad.html">Facts</a>
+            </div>
+            <div class="icon-item">
+                <a href="file:///C:/Users/tsrsr/Desktop/NASA/webbie/ngo.html">NGOs and Volunteers</a>
+            </div>
+        </div>
+
+        <!-- Global Map Section -->
+        <h1>Global Map</h1>
+        <div id="map"></div>
+
+        <!-- Pop-up Modal for Video -->
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                <span class="close" id="close" onclick="closePopup()">&times;</span>
+                <div class="video-container">
+                    <video controls id="video-player">
+                        <source src="VIDEO.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        const emojiIcon = L.divIcon({
+            className: 'emoji-icon',
+            html: '<span style="font-size: 24px;">📍</span>',
+            iconSize: [30, 30],
+        });
+
+        var map = L.map('map', {
+            zoomControl: true,
+            scrollWheelZoom: true,
+            doubleClickZoom: false,
+            dragging: true,
+            minZoom: 2,
+            maxZoom: 18
+        }).setView([0, 0], 2);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        const locations = [
+            { coords: [37.7749, -122.4194], message: 'I am in San Francisco, USA. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/San_Francisco" target="_blank">Read more</a>' },
+            { coords: [51.5074, -0.1278], message: 'I am in London, UK. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/London" target="_blank">Read more</a>' },
+            { coords: [35.6895, 139.6917], message: 'I am in Tokyo, Japan. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Tokyo" target="_blank">Read more</a>' },
+            { coords: [-33.4489, -70.6693], message: 'I am in Santiago, Chile. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Santiago" target="_blank">Read more</a>' },
+            { coords: [20.5937, 78.9629], message: 'I am in India. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/India" target="_blank">Read more</a>' },
+            { coords: [40.7128, -74.0060], message: 'I am in New York City, USA. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/New_York_City" target="_blank">Read more</a>' },
+            { coords: [-33.8688, 151.2093], message: 'I am in Sydney, Australia. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Sydney" target="_blank">Read more</a>' },
+            { coords: [30.0444, 31.2357], message: 'I am in Cairo, Egypt. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Cairo" target="_blank">Read more</a>' },
+            { coords: [23.6850, 90.3563], message: 'I am in Bangladesh. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Bangladesh" target="_blank">Read more</a>' },
+            { coords: [15.8700, 100.9925], message: 'I am in Thailand. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Thailand" target="_blank">Read more</a>' },
+            { coords: [21.473534, 55.975414], message: 'I am in Oman. Wanna read more about this? <a href="https://en.wikipedia.org/wiki/Oman" target="_blank">Read more</a>' },
+        ];
+
+        locations.forEach(location => {
+            const marker = L.marker(location.coords, { icon: emojiIcon }).addTo(map);
+            marker.bindPopup(location.message);
+        });
+
+        // Pop-up functionality
+        function openPopup() {
+            document.getElementById('popup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+            document.body.style.backgroundColor = '#A9B3A0';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                var popup = document.getElementById('popup');
+                popup.style.display = 'flex';
+            }, 12000);
+
+            document.getElementById('close').onclick = function () {
+                document.getElementById('popup').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
