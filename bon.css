@@ -1,0 +1,71 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    color: #292929;
+    background: rgba(255, 255, 255, 0.2); /* White background with 80% opacity */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Slightly darker shadow for better visibility */
+}
+
+
+h1 {
+    text-align: left;
+    color:#292929;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #e7f3fe;
+    border: 1px solid #b8daff;
+    border-radius: 4px;
+    display: none; /* Hide until results are shown */
+}
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('https://toronto.citynews.ca/wp-content/blogs.dir/sites/10/2018/07/29/19496780.jpg'); /* Replace with a valid URL */
+    background-size: cover; /* Cover the entire background */
+    background-position: center; /* Center the background */
+    margin: 0;
+    padding: 20px;
+}
+.info-text {
+    /*max-width: 600px;  Optional: to match container width */
+    /*margin: 0 auto 20px;  Centered and space below */
+    font-size: 1.1em; /* Adjust font size */
+    color:  #060606; /* Lighter color for the text */
+    text-align: left; /* Center text alignment */
+}
+.head {
+    font-size: larger;
+    color: #292929;
+
+}
